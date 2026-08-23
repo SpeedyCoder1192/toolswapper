@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "toolswapper",
+  "version": "${version}",
+  "name": "ToolSwap",
+  "description": "Automatic, obsessively configurable tool and weapon swapping.",
+  "authors": ["SCA"],
+  "license": "MIT",
+  "icon": "assets/toolswapper/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.sca.toolswapper.ToolSwapClient"],
+    "modmenu": ["com.sca.toolswapper.compat.ModMenuIntegration"]
+  },
+  "mixins": [
+    {
+      "config": "toolswapper.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.0",
+    "minecraft": ">=26.1",
+    "java": ">=25",
+    "fabric-api": "*"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
