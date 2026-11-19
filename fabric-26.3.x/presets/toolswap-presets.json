@@ -1,0 +1,169 @@
+{
+  "configVersion": 1,
+  "masterEnabled": true,
+  "activeProfile": "balanced",
+
+  "dimensionProfiles": {
+    "minecraft:the_nether": "careful",
+    "minecraft:the_end": "boss"
+  },
+
+  "profiles": {
+
+    "balanced": {
+      "description": "Sensible default. Right tool, right block, nothing clever."
+    },
+
+    "explicit": {
+      "description": "Hand-written block -> tool rules instead of scoring. Predictable, boring, never surprises you.",
+      "general": { "slotSource": "HOTBAR_ONLY" },
+      "mining": {
+        "blockOverrides": {
+          "#minecraft:leaves": "minecraft:shears",
+          "minecraft:cobweb": "minecraft:shears",
+          "#minecraft:wool": "minecraft:shears",
+          "#minecraft:logs": "minecraft:*_axe",
+          "#minecraft:planks": "minecraft:*_axe",
+          "#minecraft:wooden_stairs": "minecraft:*_axe",
+          "#minecraft:sand": "minecraft:*_shovel",
+          "minecraft:gravel": "minecraft:*_shovel",
+          "minecraft:dirt": "minecraft:*_shovel",
+          "minecraft:grass_block": "minecraft:*_shovel",
+          "minecraft:snow": "minecraft:*_shovel",
+          "minecraft:clay": "minecraft:*_shovel",
+          "minecraft:soul_sand": "minecraft:*_shovel",
+          "#minecraft:base_stone_overworld": "minecraft:*_pickaxe",
+          "#minecraft:base_stone_nether": "minecraft:*_pickaxe",
+          "minecraft:*_ore": "minecraft:*_pickaxe",
+          "minecraft:deepslate_*_ore": "minecraft:*_pickaxe",
+          "minecraft:hay_block": "minecraft:*_hoe",
+          "minecraft:*_sponge": "minecraft:*_hoe",
+          "#minecraft:crops": "minecraft:*_hoe"
+        }
+      },
+      "combat": { "enabled": true, "scoring": "BURST" }
+    },
+
+    "strip-mine": {
+      "description": "Tunnelling. Greedy, fast, silk off, fortune on.",
+      "general": {
+        "slotSource": "HOTBAR_THEN_INVENTORY",
+        "revertMode": "NEVER",
+        "requiredScoreGain": 20.0
+      },
+      "mining": {
+        "swapMidBreak": true,
+        "silkTouch": "NEVER",
+        "fortune": "ALWAYS",
+        "preferLowestSufficientTier": true,
+        "tierPenalty": 0.5
+      },
+      "combat": { "enabled": true, "trigger": "ON_ACTION" }
+    },
+
+    "silk": {
+      "description": "Collection run. Silk touch on everything it can.",
+      "mining": {
+        "silkTouch": "ALWAYS",
+        "fortune": "NEVER"
+      }
+    },
+
+    "fortune": {
+      "description": "Ore farming. Fortune on everything, silk demoted.",
+      "mining": {
+        "silkTouch": "NEVER",
+        "fortune": "ALWAYS",
+        "fortuneBonusPerLevel": 300.0
+      }
+    },
+
+    "builder": {
+      "description": "Terraforming. Mining only, no combat, spare the good gear.",
+      "general": {
+        "slotSource": "HOTBAR_ONLY",
+        "allowedHotbarSlots": [0, 1, 2],
+        "revertMode": "AFTER_DELAY",
+        "revertDelayTicks": 30
+      },
+      "mining": {
+        "preferLowestSufficientTier": true,
+        "tierPenalty": 2.0,
+        "durabilityWeight": 50.0,
+        "silkTouch": "ALWAYS"
+      },
+      "combat": { "enabled": false },
+      "filters": { "disableWhileSneaking": true }
+    },
+
+    "mob-farm": {
+      "description": "AFK grinder. Looting matters, knockback does not.",
+      "mining": { "enabled": false },
+      "combat": {
+        "scoring": "DPS",
+        "avoidKnockback": true,
+        "knockbackPenaltyPerLevel": 1000.0,
+        "lootingBonusPerLevel": 400.0,
+        "respectAttackCooldown": false
+      }
+    },
+
+    "boss": {
+      "description": "Dragon and wither. Burst damage, axes on the dragon, smite where it counts.",
+      "mining": { "enabled": false },
+      "combat": {
+        "scoring": "BURST",
+        "minCooldownProgress": 0.98,
+        "entityOverrides": {
+          "minecraft:ender_dragon": "minecraft:*_axe",
+          "minecraft:wither": "minecraft:*_sword",
+          "#minecraft:sensitive_to_smite": "minecraft:*_sword"
+        }
+      }
+    },
+
+    "careful": {
+      "description": "Deep expeditions. Never break a tool, never lose the enchanted one.",
+      "general": { "slotSource": "HOTBAR_THEN_INVENTORY" },
+      "safety": {
+        "durabilityGuard": "PERCENT",
+        "minDurabilityPercent": 0.15,
+        "allowGuardedIfNoAlternative": false
+      },
+      "items": {
+        "neverRisk": ["minecraft:netherite_pickaxe", "minecraft:elytra", "minecraft:trident"]
+      },
+      "mining": { "durabilityWeight": 100.0 }
+    },
+
+    "stealth": {
+      "description": "Minimum packet footprint for strict servers.",
+      "general": {
+        "slotSource": "HOTBAR_ONLY",
+        "swapDelayTicks": 1,
+        "swapCooldownTicks": 3,
+        "maxSwapsPerSecond": 4,
+        "revertMode": "NEVER"
+      },
+      "mining": { "swapMidBreak": false, "trigger": "ON_ACTION" },
+      "combat": { "trigger": "ON_ACTION", "minCooldownProgress": 0.95 },
+      "safety": {
+        "antiCheatSafeMode": true,
+        "antiCheatMinSwapIntervalTicks": 4,
+        "disableInventorySwapsOnMultiplayer": true
+      }
+    }
+  },
+
+  "display": {
+    "hud": true,
+    "anchor": "TOP_LEFT",
+    "showProfile": true,
+    "showLastSwap": true
+  },
+
+  "debug": {
+    "logDecisions": false,
+    "logScores": false
+  }
+}

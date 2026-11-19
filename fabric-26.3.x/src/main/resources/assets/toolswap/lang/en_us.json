@@ -1,0 +1,14 @@
+{
+  "category.toolswap": "ToolSwap",
+  "key.toolswap.toggle": "Toggle ToolSwap",
+  "key.toolswap.cycle_profile": "Cycle Profile",
+  "key.toolswap.suspend": "Suspend While Held",
+  "key.toolswap.force_swap": "Force Swap Now",
+  "key.toolswap.reload": "Reload Config",
+  "toolswap.hud.on": "ToolSwap ON",
+  "toolswap.hud.off": "ToolSwap OFF",
+  "toolswap.msg.enabled": "ToolSwap enabled",
+  "toolswap.msg.disabled": "ToolSwap disabled",
+  "toolswap.msg.profile": "Profile: %s",
+  "toolswap.msg.reloaded": "Config reloaded"
+}
